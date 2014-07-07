@@ -181,7 +181,7 @@ hljs.initHighlightingOnLoad();
 <body>
 <h1>Title</h1>
 
-<p>R MATRICES - Matrix definitions</p>
+<p>#R MATRICES - Matrix definitions</p>
 
 <pre><code class="r">A = matrix(c(1,-1,-1,-1),nrow=2,ncol =2,byrow = T)
 A
@@ -230,7 +230,7 @@ E
 ## [3,]    0    1    0
 </code></pre>
 
-<p>INDEMPOTENT MATRICES - If A squared = A is TRUE</p>
+<h1>INDEMPOTENT MATRICES - - If A squared = A is TRUE</h1>
 
 <pre><code class="r">      all.equal (A,(a2 = A %*% A))
 </code></pre>
@@ -262,7 +262,7 @@ E
 <pre><code>## [1] &quot;Mean relative difference: 2&quot;
 </code></pre>
 
-<p>ORTHOGONAL MATRICES - If A transpose = A inverse</p>
+<h1>ORTHOGONAL MATRICES - If A transpose = A inverse</h1>
 
 <pre><code class="r">      all.equal(t(A),solve(A))
 </code></pre>
