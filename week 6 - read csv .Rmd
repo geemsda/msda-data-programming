@@ -1,5 +1,7 @@
-Title
+Read comma delimited file into R  (file name pizza.store.data)
 ========================================================
 
-str(pizza.store.data)
-summary(pizza.store.data)
+
+```{str(pizza.store.data)}
+{summary(pizza.store.data)}
+```
