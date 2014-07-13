@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Read html file as input </title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<h1>Read html file as input </h1>
+
+<p><a href="http://www.tdcj.state.tx.us/death_row/dr_executed_offenders.html">http://www.tdcj.state.tx.us/death_row/dr_executed_offenders.html</a></p>
+
+<pre><code class="r">library(XML)
+mps &lt;- &quot;http://www.tdcj.state.tx.us/death_row/dr_executed_offenders.html&quot; 
+
+# parse the document for R representation: 
+mps.doc &lt;- htmlParse(mps)
+
+# get all the tables in mps.doc as data frames
+mps.tabs &lt;- readHTMLTable(mps.doc) 
+print(mps.tabs)
+</code></pre>
+
+<pre><code>## $`NULL`
+##            V1                     V2             V3              V4
+## 1   Execution                   Link           Link       Last Name
+## 2         515   Offender Information Last Statement        Villegas
+## 3         514   Offender Information Last Statement       Hernandez
+## 4         513   Offender Information Last Statement           Sells
+## 5         512   Offender Information Last Statement           Doyle
+## 6         511   Offender Information Last Statement          Jasper
+## 7         510   Offender Information Last Statement           Basso
+## 8         509   Offender Information Last Statement          Tamayo
+## 9         508   Offender Information Last Statement          Martin
+## 10        507   Offender Information Last Statement        McCoskey
+## 11        506   Offender Information Last Statement          Yowell
+## 12        505   Offender Information Last Statement            Diaz
+## 13        504   Offender Information Last Statement           Garza
+## 14        503   Offender Information Last Statement         Feldman
+## 15        502   Offender Information Last Statement            Ross
+## 16        501   Offender Information Last Statement     Quintanilla
+## 17        500   Offender Information Last Statement        McCarthy
+## 18        499   Offender Information Last Statement         Chester
+## 19        498   Offender Information Last Statement        Williams
+## 20        497   Offender Information Last Statement            Parr
+## 21        496   Offender Information Last Statement            Cobb
+## 22        495   Offender Information Last Statement      Threadgill
+## 23        494   Offender Information Last Statement           Lewis
+## 24        493   Offender Information Last Statement            Blue
+## 25        492   Offender Information Last Statement          Hughes
+## 26        491   Offender Information Last Statement       Hernandez
+## 27        490   Offender Information Last Statement           Swain
+## 28        489   Offender Information Last Statement    Roberts, Jr.
+## 29        488   Offender Information Last Statement           Hines
+## 30        487   Offender Information Last Statement           Green
+## 31        486   Offender Information Last Statement          Foster
+## 32        485   Offender Information Last Statement          Harris
+## 33        484   Offender Information Last Statement          Wilson
+## 34        483   Offender Information Last Statement           Hearn
+## 35        482   Offender Information Last Statement           Adams
+## 36        481   Offender Information Last Statement       Hernandez
+## 37        480   Offender Information Last Statement        Thurmond
+## 38        479   Offender Information Last Statement           Rivas
+## 39        478   Offender Information Last Statement       Hernandez
+## 40        477   Offender Information Last Statement         Esparza
+## 41        476   Offender Information Last Statement          Garcia
+## 42        475   Offender Information Last Statement          Brewer
+## 43        474   Offender Information Last Statement           Woods
+## 44        473   Offender Information Last Statement          Robles
+## 45        472   Offender Information Last Statement         Stroman
+## 46        471 Offender   Information Last Statement            Leal
+## 47        470   Offender Information Last Statement          Mathis
+## 48        469   Offender Information Last Statement          Taylor
+## 49        468   Offender Information Last Statement        Bradford
+## 50        467   Offender Information Last Statement            Kerr
+## 51        466   Offender Information Last Statement           Adams
+## 52        465   Offender Information Last Statement            Hall
+## 53        464   Offender Information Last Statement          Wooten
+## 54        463   Offender Information Last Statement           Cantu
+## 55        462   Offender Information Last Statement         Jackson
+## 56        461   Offender Information Last Statement           Perry
+## 57        460   Offender Information Last Statement          Powell
+## 58        459   Offender Information Last Statement           Jones
+## 59        458   Offender Information Last Statement            Alba
+## 60        457   Offender Information Last Statement         Cannady
+## 61        456   Offender Information Last Statement        Galloway
+## 62        455   Offender Information Last Statement           Varga
+## 63        454   Offender Information Last Statement      Bustamante
+## 64        453   Offender Information Last Statement         Berkley
+## 65        452   Offender Information Last Statement            Alix
+## 66        451   Offender Information Last Statement         Maxwell
+## 67        450   Offender Information Last Statement          Sigala
+## 68        449   Offender Information Last Statement         Johnson
+## 69        448   Offender Information Last Statement          Mosley
+## 70        447   Offender Information Last Statement           Woods
+## 71        446   Offender Information Last Statement        Thompson
+## 72        445   Offender Information Last Statement         Simpson
+## 73        444   Offender Information Last Statement           Valle
+## 74        443   Offender Information Last Statement          Oliver
+## 75        442   Offender Information Last Statement         Blanton
+## 76        441   Offender Information Last Statement         Coleman
+## 77        440   Offender Information Last Statement           Moody
+## 78        439   Offender Information Last Statement         Hankins
+## 79        438   Offender Information Last Statement           Riley
+## 80        437   Offender Information Last Statement         Johnson
+## 81        436   Offender Information Last Statement         Rosales
+## 82        435   Offender Information Last Statement         Salazar
+## 83        434   Offender Information Last Statement        Martinez
+## 84        433   Offender Information Last Statement          Morris
+## 85        432   Offender Information Last Statement       Pondexter
+## 86        431   Offender Information Last Statement         Johnson
+## 87        430   Offender Information Last Statement      Scheanette
+## 88        429   Offender Information Last Statement        Martinez
+## 89        428   Offender Information Last Statement           Ortiz
+## 90        427   Offender Information Last Statement        Martinez
+## 91        426   Offender Information Last Statement         Perkins
+## 92        425   Offender Information Last Statement           Moore
+## 93        424   Offender Information Last Statement           Moore
+## 94        423   Offender Information Last Statement          Hudson
+## 95        422   Offender Information Last Statement           Manns
+## 96        421   Offender Information Last Statement    Whitaker III
+## 97        420   Offender Information Last Statement          Taylor
+## 98        419   Offender Information Last Statement          Wright
+## 99        418   Offender Information Last Statement           Nenno
+## 100       417   Offender Information Last Statement            Ries
+## 101       416   Offender Information Last Statement           Watts
+## 102       415   Offender Information Last Statement           Kelly
+## 103       414   Offender Information Last Statement          Murray
+## 104       413   Offender Information Last Statement       Rodriguez
+## 105       412   Offender Information Last Statement          Dorsey
+## 106       411   Offender Information Last Statement             Chi
+## 107       410   Offender Information Last Statement        Medellin
+## 108       409   Offender Information Last Statement           Davis
+## 109       408   Offender Information Last Statement         Sonnier
+## 110       407   Offender Information Last Statement          Turner
+## 111       406   Offender Information Last Statement     Chamberlain
+## 112       405   Offender Information Last Statement         Richard
+## 113       404   Offender Information Last Statement          Kimmel
+## 114       403   Offender Information Last Statement           Roach
+## 115       402   Offender Information Last Statement          Amador
+## 116       401   Offender Information Last Statement          Mosley
+## 117       400   Offender Information Last Statement          Conner
+## 118       399   Offender Information Last Statement            Parr
+## 119       398   Offender Information Last Statement         Johnson
+## 120       397   Offender Information Last Statement          Knight
+## 121       396   Offender Information Last Statement           Reyes
+## 122       395   Offender Information Last Statement       Rodriguez
+## 123       394   Offender Information Last Statement        Griffith
+## 124       393   Offender Information Last Statement           Smith
+## 125       392   Offender Information Last Statement         Dickson
+## 126       391   Offender Information Last Statement           Clark
+## 127       390   Offender Information Last Statement          Pippin
+## 128       389   Offender Information Last Statement       Gutierrez
+## 129       388   Offender Information Last Statement           Nealy
+## 130       387   Offender Information Last Statement         Nichols
+## 131       386   Offender Information Last Statement           Perez
+## 132       385   Offender Information Last Statement          Miller
+## 133       384   Offender Information Last Statement        Anderson
+## 134       383   Offender Information Last Statement         Jackson
+## 135       382   Offender Information Last Statement           Swift
+## 136       381   Offender Information Last Statement           Moore
+## 137       380   Offender Information Last Statement        Granados
+## 138       379   Offender Information Last Statement         Shannon
+## 139       378   Offender Information Last Statement         Jackson
+## 140       377   Offender Information Last Statement         Summers
+## 141       376   Offender Information Last Statement        Matchett
+## 142       375   Offender Information Last Statement         Frazier
+## 143       374   Offender Information Last Statement          Fuller
+## 144       373   Offender Information Last Statement        Hinojosa
+## 145       372   Offender Information Last Statement       Wyatt Jr.
+## 146       371   Offender Information Last Statement        Anderson
+## 147       370   Offender Information Last Statement           Brown
+## 148       369   Offender Information Last Statement         O&#39;Brien
+## 149       368   Offender Information Last Statement        Resendiz
+## 150       367   Offender Information Last Statement           Reese
+## 151       366   Offender Information Last Statement       Titsworth
+## 152       365   Offender Information Last Statement         Aguilar
+## 153       364   Offender Information Last Statement          Herron
+## 154       363   Offender Information Last Statement          Wilson
+## 155       362   Offender Information Last Statement           Kincy
+## 156       361   Offender Information Last Statement     Salazar Jr.
+## 157       360   Offender Information Last Statement          Hughes
+## 158       359   Offender Information Last Statement       Smith Jr.
+## 159       358   Offender Information Last Statement     Neville Jr.
+## 160       357   Offender Information Last Statement    Elizalde Jr.
+## 161       356   Offender Information Last Statement          Dudley
+## 162       355   Offender Information Last Statement          Thomas
+## 163       354   Offender Information Last Statement          Rowell
+## 164       353   Offender Information Last Statement         Thacker
+## 165       352   Offender Information Last Statement           White
+## 166       351   Offender Information Last Statement         Ramirez
+## 167       350   Offender Information Last Statement          Howard
+## 168       349   Offender Information Last Statement          Newton
+## 169       348   Offender Information Last Statement         Shields
+## 170       347   Offender Information Last Statement        Sterling
+## 171       346   Offender Information Last Statement        Martinez
+## 172       345   Offender Information Last Statement        Martinez
+## 173       344   Offender Information Last Statement      Cartwright
+## 174       343   Offender Information Last Statement           Wolfe
+## 175       342   Offender Information Last Statement         Pursley
+## 176       341   Offender Information Last Statement         Roberts
+## 177       340   Offender Information Last Statement          Hopper
+## 178       339   Offender Information Last Statement         Bagwell
+## 179       338   Offender Information Last Statement          Kunkle
+## 180       337   Offender Information Last Statement          Porter
+## 181       336   Offender Information Last Statement         Fuentes
+## 182       335   Offender Information Last Statement      McWilliams
+## 183       334   Offender Information Last Statement        McCullum
+## 184       333   Offender Information Last Statement          Morrow
+## 185       332   Offender Information Last Statement          Morris
+## 186       331   Offender Information Last Statement           Green
+## 187       330   Offender Information Last Statement          Morrow
+## 188       329   Offender Information Last Statement         Aldrich
+## 189       328   Offender Information Last Statement          Miniel
+## 190       327   Offender Information Last Statement           Green
+## 191       326   Offender Information Last Statement          Flores
+## 192       325   Offender Information Last Statement    Allridge III
+## 193       324   Offender Information Last Statement           Busby
+## 194       323   Offender Information Last Statement          Harris
+## 195       322   Offender Information Last Statement       Patterson
+## 196       321   Offender Information Last Statement          Cotton
+## 197       320   Offender Information Last Statement      Willingham
+## 198       319   Offender Information Last Statement         Hopkins
+## 199       318   Offender Information Last Statement         Lagrone
+## 200       317   Offender Information Last Statement         Vickers
+## 201       316   Offender Information Last Statement       Zimmerman
+## 202       315   Offender Information Last Statement           Bruce
+## 203       314   Offender Information Last Statement        Matthews
+## 204       313   Offender Information Last Statement          Murphy
+## 205       312   Offender Information Last Statement          Duncan
+## 206       311   Offender Information Last Statement           Henry
+## 207       310   Offender Information Last Statement           Hayes
+## 208       309   Offender Information Last Statement         Janecka
+## 209       308   Offender Information Last Statement          Ransom
+## 210       307   Offender Information Last Statement      Black, Sr.
+## 211       306   Offender Information Last Statement        Crawford
+## 212       305   Offender Information Last Statement         Johnson
+## 213       304   Offender Information Last Statement          Jacobs
+## 214       303   Offender Information Last Statement          Vaughn
+## 215       302   Offender Information Last Statement          Chavez
+## 216       301   Offender Information Last Statement         Colburn
+## 217       300   Offender Information Last Statement            Clay
+## 218       299   Offender Information Last Statement            Cook
+## 219       298   Offender Information Last Statement        Williams
+## 220       297   Offender Information Last Statement       Dunn, Jr.
+## 221       296   Offender Information Last Statement         Elliott
+## 222       295   Offender Information Last Statement          Riddle
+## 223       294   Offender Information Last Statement         Dinkins
+## 224       293   Offender Information Last Statement           Curry
+## 225       292   Offender Information Last Statement     Lookingbill
+## 226       291   Offender Information Last Statement        Baltazar
+## 227       290   Offender Information Last Statement       Gallamore
+## 228       289   Offender Information Last Statement         Collier
+## 229       288   Offender Information Last Statement           Rojas
+## 230       287   Offender Information Last Statement        Chappell
+## 231       286   Offender Information Last Statement            Ogan
+## 232       285   Offender Information Last Statement          Powell
+## 233       284   Offender Information Last Statement            King
+## 234       283   Offender Information Last Statement            Mays
+## 235       282   Offender Information Last Statement      Shamburger
+## 236       281   Offender Information Last Statement         Patrick
+## 237       280   Offender Information Last Statement          Walker
+## 238       279   Offender Information Last Statement       Patterson
+## 239       278   Offender Information Last Statement       Etheridge
+## 240       277   Offender Information Last Statement          Medina
+## 241       276   Offender Information Last Statement           Jones
+## 242       275   Offender Information Last Statement         Kutzner
+## 243       274   Offender Information Last Statement        Williams
+## 244       273   Offender Information Last Statement         Coulson
+## 245       272   Offender Information Last Statement          Reneau
+## 246       271   Offender Information Last Statement      Baker, Jr.
+## 247       270   Offender Information Last Statement         Beazley
+## 248       269   Offender Information Last Statement        Martinez
+## 249       268   Offender Information Last Statement          Styron
+## 250       267   Offender Information Last Statement          Reeves
+## 251       266   Offender Information Last Statement       Hernandez
+## 252       265   Offender Information Last Statement           Casey
+## 253       264   Offender Information Last Statement           Burns
+## 254       263   Offender Information Last Statement  Santellan, Sr.
+## 255       262   Offender Information Last Statement          Tigner
+## 256       261   Offender Information Last Statement            Delk
+## 257       260   Offender Information Last Statement    Hafdahl, Sr.
+## 258       259   Offender Information Last Statement       Broussard
+## 259       258   Offender Information Last Statement          Arnold
+## 260       257   Offender Information Last Statement           Moore
+## 261       256   Offender Information Last Statement           Cooks
+## 262       255   Offender Information Last Statement            Rudd
+## 263       254   Offender Information Last Statement          Tucker
+## 264       253   Offender Information Last Statement        Mitchell
+## 265       252   Offender Information Last Statement            Knox
+## 266       251   Offender Information Last Statement        Doughtie
+## 267       250   Offender Information Last Statement            Hill
+## 268       249   Offender Information Last Statement         Wilkens
+## 269       248   Offender Information Last Statement      Richardson
+## 270       247   Offender Information Last Statement           Wheat
+## 271       246   Offender Information Last Statement            Goff
+## 272       245   Offender Information Last Statement          Massey
+## 273       244   Offender Information Last Statement        Dowthitt
+## 274       243   Offender Information Last Statement       Hernandez
+## 275       242   Offender Information Last Statement       Alexander
+## 276       241   Offender Information Last Statement         Goodwin
+## 277       240   Offender Information Last Statement           Clark
+## 278       239   Offender Information Last Statement           Jones
+## 279       238   Offender Information Last Statement          Hittle
+## 280       237   Offender Information Last Statement          Miller
+## 281       236   Offender Information Last Statement        Chambers
+## 282       235   Offender Information Last Statement          Lawton
+## 283       234   Offender Information Last Statement          Flores
+## 284       233   Offender Information Last Statement      Dillingham
+## 285       232   Offender Information Last Statement          McGinn
+## 286       231   Offender Information Last Statement        Caldwell
+## 287       230   Offender Information Last Statement           Gibbs
+## 288       229   Offender Information Last Statement           Jones
+## 289       228   Offender Information Last Statement     Satterwhite
+## 290       227   Offender Information Last Statement            Cruz
+## 291       226   Offender Information Last Statement        Roberson
+## 292       225   Offender Information Last Statement           Soria
+## 293       224   Offender Information Last Statement          Joiner
+## 294       223   Offender Information Last Statement      San Miguel
+## 295       222   Offender Information Last Statement          Graham
+## 296       221   Offender Information Last Statement          Nuncio
+## 297       220   Offender Information Last Statement           Burks
+## 298       219   Offender Information Last Statement           Mason
+## 299       218   Offender Information Last Statement          Carter
+## 300       217   Offender Information Last Statement         Clayton
+## 301       216   Offender Information Last Statement          Foster
+## 302       215   Offender Information Last Statement      Richardson
+## 303       214   Offender Information Last Statement         McBride
+## 304       213   Offender Information Last Statement        Kitchens
+## 305       212   Offender Information Last Statement         Jackson
+## 306       211   Offender Information Last Statement         Gribble
+## 307       210   Offender Information Last Statement       Wilkerson
+## 308       209   Offender Information Last Statement     Barnes, Jr.
+## 309       208   Offender Information Last Statement           Beets
+## 310       207   Offender Information Last Statement            Goss
+## 311       206   Offender Information Last Statement        Moreland
+## 312       205   Offender Information Last Statement        McGinnis
+## 313       204   Offender Information Last Statement     Hughes, Jr.
+## 314       203   Offender Information Last Statement         Robison
+## 315       202   Offender Information Last Statement           Hicks
+## 316       201   Offender Information Last Statement         Goodman
+## 317       200   Offender Information Last Statement Heiselbetz, Jr.
+## 318       199   Offender Information Last Statement     Felder, Jr.
+## 319       198   Offender Information Last Statement         Atworth
+## 320       197   Offender Information Last Statement        Beathard
+## 321       196   Offender Information Last Statement            Long
+## 322       195   Offender Information Last Statement       Gutierrez
+## 323       194   Offender Information Last Statement            Lamb
+## 324       193   Offender Information Last Statement        Jennings
+## 325       192   Offender Information Last Statement      Cantu, Jr.
+## 326       191   Offender Information Last Statement        McFadden
+## 327       190   Offender Information Last Statement           Crane
+## 328       189   Offender Information Last Statement           Smith
+## 329       188   Offender Information Last Statement           Davis
+## 330       187   Offender Information Last Statement          Barnes
+## 331       186   Offender Information Last Statement           Jones
+## 332       185   Offender Information Last Statement    Trevino, Jr.
+## 333       184   Offender Information Last Statement         Earhart
+## 334       183   Offender Information Last Statement            Dunn
+## 335       182   Offender Information Last Statement            Boyd
+## 336       181   Offender Information Last Statement        Blackmon
+## 337       180   Offender Information Last Statement          Fuller
+## 338       179   Offender Information Last Statement          Tuttle
+## 339       178   Offender Information Last Statement         Faulder
+## 340       177   Offender Information Last Statement          Little
+## 341       176   Offender Information Last Statement         Coleman
+## 342       175   Offender Information Last Statement      De La Cruz
+## 343       174   Offender Information Last Statement           Foust
+## 344       173   Offender Information Last Statement           White
+## 345       172   Offender Information Last Statement          Rector
+## 346       171   Offender Information Last Statement           Green
+## 347       170   Offender Information Last Statement           Cantu
+## 348       169   Offender Information Last Statement          Barber
+## 349       168   Offender Information Last Statement         Cordova
+## 350       167   Offender Information Last Statement            Vega
+## 351       166   Offender Information Last Statement          Farris
+## 352       165   Offender Information Last Statement           Moody
+## 353       164   Offender Information Last Statement          Meanes
+## 354       163   Offender Information Last Statement           Emery
+## 355       162   Offender Information Last Statement          Corwin
+## 356       161   Offender Information Last Statement          McDuff
+## 357       160   Offender Information Last Statement          Nobles
+## 358       159   Offender Information Last Statement            Cruz
+## 359       158   Offender Information Last Statement        Castillo
+## 360       157   Offender Information Last Statement     Teague, Jr.
+## 361       156   Offender Information Last Statement    Camacho, Jr.
+## 362       155   Offender Information Last Statement         Narvaiz
+## 363       154   Offender Information Last Statement           Pyles
+## 364       153   Offender Information Last Statement         Boggess
+## 365       152   Offender Information Last Statement           Muniz
+## 366       151   Offender Information Last Statement          Carter
+## 367       150   Offender Information Last Statement       McFarland
+## 368       149   Offender Information Last Statement           Gosch
+## 369       148   Offender Information Last Statement          Cannon
+## 370       147   Offender Information Last Statement           Hogue
+## 371       146   Offender Information Last Statement          Renfro
+## 372       145   Offender Information Last Statement          Tucker
+## 373       144   Offender Information Last Statement        Lockhart
+## 374       143   Offender Information Last Statement      Livingston
+## 375       142   Offender Information Last Statement           Sharp
+## 376       141   Offender Information Last Statement          Fuller
+## 377       140   Offender Information Last Statement           Lauti
+## 378       139   Offender Information Last Statement          Ransom
+## 379       138   Offender Information Last Statement           Green
+## 380       137   Offender Information Last Statement       Adanandus
+## 381       136   Offender Information Last Statement         Cockrum
+## 382       135   Offender Information Last Statement           Stone
+## 383       134   Offender Information Last Statement          Turner
+## 384       133   Offender Information Last Statement           Davis
+## 385       132   Offender Information Last Statement       West, Jr.
+## 386       131   Offender Information Last Statement         Montoya
+## 387       130   Offender Information Last Statement         Johnson
+## 388       129   Offender Information Last Statement          Stoker
+## 389       128   Offender Information Last Statement       Behringer
+## 390       127   Offender Information Last Statement          Losada
+## 391       126   Offender Information Last Statement    Johnson, Jr.
+## 392       125   Offender Information Last Statement          Harris
+## 393       124   Offender Information Last Statement          Rogers
+## 394       123   Offender Information Last Statement          Madden
+## 395       122   Offender Information Last Statement           White
+## 396       121   Offender Information Last Statement         Callins
+## 397       120   Offender Information Last Statement          Lackey
+## 398       119   Offender Information Last Statement        Drinkard
+## 399       118   Offender Information Last Statement          Belyeu
+## 400       117   Offender Information Last Statement         Westley
+## 401       116   Offender Information Last Statement      Washington
+## 402       115   Offender Information Last Statement         Baldree
+## 403       114   Offender Information Last Statement           Boyle
+## 404       113   Offender Information Last Statement          Gentry
+## 405       112   Offender Information Last Statement           Woods
+## 406       111   Offender Information Last Statement          Spence
+## 407       110   Offender Information Last Statement          Herman
+## 408       109   Offender Information Last Statement       Barefield
+## 409       108   Offender Information Last Statement    Brimage, Jr.
+## 410       107   Offender Information Last Statement   Gonzales, Jr.
+## 411       106   Offender Information Last Statement        Granviel
+## 412       105   Offender Information Last Statement         Jenkins
+## 413       104   Offender Information Last Statement         Briddle
+## 414       103   Offender Information Last Statement           Banda
+## 415       102   Offender Information Last Statement           Vuong
+## 416       101   Offender Information Last Statement            Amos
+## 417       100   Offender Information Last Statement            Lane
+## 418        99   Offender Information Last Statement         Johnson
+## 419        98   Offender Information Last Statement     Sattiewhite
+## 420        97   Offender Information Last Statement         Hammond
+## 421        96   Offender Information Last Statement        Fearance
+## 422        95   Offender Information Last Statement        Allridge
+## 423        94   Offender Information Last Statement            Mann
+## 424        93   Offender Information Last Statement            Mays
+## 425        92   Offender Information Last Statement         Hawkins
+## 426        91   Offender Information Last Statement         Gardner
+## 427        90   Offender Information Last Statement          Motley
+## 428        89   Offender Information Last Statement        Williams
+## 429        88   Offender Information Last Statement    Russell, Jr.
+## 430        87   Offender Information Last Statement         Marquez
+## 431        86   Offender Information Last Statement          Jacobs
+## 432        85   Offender Information Last Statement        Kinnamon
+## 433        84   Offender Information Last Statement      Clark, Jr.
+## 434        83   Offender Information Last Statement          Bridge
+## 435        82   Offender Information Last Statement        Williams
+## 436        81   Offender Information Last Statement            Lott
+## 437        80   Offender Information Last Statement       Gutierrez
+## 438        79   Offender Information Last Statement            Drew
+## 439        78   Offender Information Last Statement           Crank
+## 440        77   Offender Information Last Statement         Nethery
+## 441        76   Offender Information Last Statement         Rougeau
+## 442        75   Offender Information Last Statement        Anderson
+## 443        74   Offender Information Last Statement         Beavers
+## 444        73   Offender Information Last Statement            Webb
+## 445        72   Offender Information Last Statement         Barnard
+## 446        71   Offender Information Last Statement        Phillips
+## 447        70   Offender Information Last Statement            Cook
+## 448        69   Offender Information Last Statement          Bonham
+## 449        68   Offender Information Last Statement           James
+## 450        67   Offender Information Last Statement       Wilkerson
+## 451        66   Offender Information Last Statement           Cantu
+## 452        65   Offender Information Last Statement           Kelly
+## 453        64   Offender Information Last Statement         Holland
+## 454        63   Offender Information Last Statement        Jernigan
+## 455        62   Offender Information Last Statement          Harris
+## 456        61   Offender Information Last Statement          Harris
+## 457        60   Offender Information Last Statement      Duff-Smith
+## 458        59   Offender Information Last Statement         Sawyers
+## 459        58   Offender Information Last Statement         Herrera
+## 460        57   Offender Information Last Statement         Stewart
+## 461        56   Offender Information Last Statement         Montoya
+## 462        55   Offender Information Last Statement         Santana
+## 463        54   Offender Information Last Statement        Lincecum
+## 464        53   Offender Information Last Statement         Griffin
+## 465        52   Offender Information Last Statement     Demouchette
+## 466        51   Offender Information Last Statement         Johnson
+## 467        50   Offender Information Last Statement      Black, Jr.
+## 468        49   Offender Information Last Statement     Romero, Jr.
+## 469        48   Offender Information Last Statement             May
+## 470        47   Offender Information Last Statement           White
+## 471        46   Offender Information Last Statement           Ellis
+## 472        45   Offender Information Last Statement           Clark
+## 473        44   Offender Information Last Statement         Garrett
+## 474        43   Offender Information Last Statement         Cordova
+## 475        42   Offender Information Last Statement           Green
+## 476        41   Offender Information Last Statement         Russell
+## 477        40   Offender Information Last Statement            Bird
+## 478        39   Offender Information Last Statement          Cuevas
+## 479        38   Offender Information Last Statement          Buxton
+## 480        37   Offender Information Last Statement         Derrick
+## 481        36   Offender Information Last Statement           Smith
+## 482        35   Offender Information Last Statement        Anderson
+## 483        34   Offender Information Last Statement          Butler
+## 484        33   Offender Information Last Statement         De Luna
+## 485        32   Offender Information Last Statement          Paster
+## 486        31   Offender Information Last Statement           McCoy
+## 487        30   Offender Information Last Statement            King
+## 488        29   Offender Information Last Statement     Landry, Sr.
+## 489        28   Offender Information Last Statement        Franklin
+## 490        27   Offender Information Last Statement       Streetman
+## 491        26   Offender Information Last Statement       Starvaggi
+## 492        25   Offender Information Last Statement        Thompson
+## 493        24   Offender Information Last Statement         Johnson
+## 494        23   Offender Information Last Statement        Williams
+## 495        22   Offender Information Last Statement          Moreno
+## 496        21   Offender Information Last Statement       Hernandez
+## 497        20   Offender Information Last Statement         Andrade
+## 498        19   Offender Information Last Statement           Evans
+## 499        18   Offender Information Last Statement          Wicker
+## 500        17   Offender Information Last Statement           Smith
+## 501        16   Offender Information Last Statement          Woolls
+## 502        15   Offender Information Last Statement           Brock
+## 503        14   Offender Information Last Statement        Esquivel
+## 504        13   Offender Information Last Statement       Pinkerton
+## 505        12   Offender Information Last Statement          Barney
+## 506        11   Offender Information Last Statement            Bass
+## 507        10   Offender Information Last Statement        Rumbaugh
+## 508         9   Offender Information Last Statement          Porter
+## 509         8   Offender Information Last Statement          Milton
+## 510         7   Offender Information Last Statement      De La Rosa
+## 511         6   Offender Information Last Statement           Morin
+## 512         5   Offender Information Last Statement        Skillern
+## 513         4   Offender Information Last Statement        Barefoot
+## 514         3   Offender Information Last Statement         O&#39;Bryan
+## 515         2   Offender Information Last Statement           Autry
+## 516         1   Offender Information Last Statement     Brooks, Jr.
+##              V5          V6  V7         V8       V9          V10
+## 1    First Name TDCJ Number Age       Date     Race       County
+## 2          Jose      999417  39 04/16/2014 Hispanic       Nueces
+## 3        Ramiro      999342  44 04/09/2014 Hispanic         Kerr
+## 4         Tommy      999367  49 04/03/2014    White     ValVerde
+## 5       Anthony      999478  29 03/27/2014    Black       Dallas
+## 6           Ray      999341  33 03/19/2014    Black        Bexar
+## 7       Suzanne      999329  59 02/05/2014    White       Harris
+## 8         Edgar      999130  46 01/22/2014 Hispanic       Harris
+## 9         Jerry      999552  43 12/03/2013    White         Leon
+## 10        Jamie      999053  49 11/12/2013    White       Harris
+## 11      Michael      999334  43 10/09/2013    White      Lubbock
+## 12       Arturo      999345  37 09/26/2013 Hispanic      Hidalgo
+## 13       Robert      999466  30 09/19/2013 Hispanic      Hidalgo
+## 14      Douglas      999326  55 07/31/2013    White       Dallas
+## 15       Vaughn      999429  41 07/18/2013    Black      Lubbock
+## 16         John      999491  36 07/16/2013 Hispanic     Victoria
+## 17     Kimberly      999287  52 06/26/2013    Black       Dallas
+## 18        Elroy      999280  43 06/12/2013    Black    Jefferson
+## 19      Jeffrey      999350  37 05/15/2013    Black       Harris
+## 20      Carroll      999479  35 05/07/2013    Black     McLennan
+## 21      Richard      999467  29 04/26/2013    White     Cherokee
+## 22       Ronnie      999424  40 04/16/2013    Black      Navarro
+## 23        Ricky      999097  50 04/09/2013    Black        Smith
+## 24         Carl      999151  48 02/21/2013    Black       Brazos
+## 25      Preston         939  46 11/15/2012    Black       Harris
+## 26        Ramon      999431  41 11/14/2012 Hispanic        Bexar
+## 27        Mario      999475  33 11/08/2012    Black        Gregg
+## 28       Donnie      999487  41 10/31/2012    White         Polk
+## 29        Bobby      999025  40 10/24/2012    White       Dallas
+## 30     Jonathan      999421  44 10/10/2012    Black   Montgomery
+## 31        Cleve      999470  48 09/25/2012    White      Tarrant
+## 32       Robert      999364  40 09/20/2012    Black       Dallas
+## 33       Marvin      999098  54 08/07/2012    Black    Jefferson
+## 34      Yokamon      999292  33 07/18/2012    Black       Dallas
+## 35       Beunka      999486  29 04/26/2012    Black     Cherokee
+## 36        Jesse      999425  47 03/28/2012 Hispanic       Dallas
+## 37        Keith      999435  52 03/07/2012    White   Montgomery
+## 38       George      999394  41 02/29/2012 Hispanic       Dallas
+## 39      Rodrigo      999474  38 01/26/2012 Hispanic        Bexar
+## 40    Guadalupe      999385  46 11/16/2011 Hispanic        Bexar
+## 41        Frank      999418  39 10/27/2011 Hispanic        Bexar
+## 42     Lawrence      999327  44 09/21/2011    White       Brazos
+## 43       Steven      999427  31 09/13/2011    White       Denton
+## 44       Martin      999457  33 08/10/2011 Hispanic       Nueces
+## 45         Mark      999409  42 07/20/2011    White       Dallas
+## 46     Humberto      999162  38 07/07/2011 Hispanic        Bexar
+## 47       Milton      999337  32 06/21/2011    Black    Fort Bend
+## 48          Lee      999344  32 06/16/2011    White        Bowie
+## 49      Gayland         966  42 06/01/2011    Black       Dallas
+## 50         Cary      999449  46 05/03/2011    White      Tarrant
+## 51      Timothy      999448  42 02/22/2011    Black       Harris
+## 52      Michael      999346  31 02/15/2011    White      Tarrant
+## 53        Larry      999269  51 10/21/2010    Black        Lamar
+## 54        Peter      999093  35 08/17/2010 Hispanic       Harris
+## 55      Derrick      999263  42 07/20/2010    Black       Harris
+## 56      Michael      999444  28 07/01/2010    White   Montgomery
+## 57        David      000612  59 06/15/2010    White       Travis
+## 58       George      999147  36 06/02/2010    Black       Dallas
+## 59         John      999027  54 05/25/2010 Hispanic       Collin
+## 60      Rogelio      999245  37 05/19/2010 Hispanic          Bee
+## 61        Billy      999349  41 05/13/2010    White         Hunt
+## 62        Kevin      999368  41 05/12/2010    White         Hunt
+## 63       Samuel      999380  40 04/27/2010 Hispanic    Fort Bend
+## 64      William      999422  31 04/22/2010    White      El Paso
+## 65     Franklin      999286  34 03/30/2010    Black       Harris
+## 66       Joshua      999408  31 03/11/2010    White        Bexar
+## 67      Michael      999397  32 03/02/2010 Hispanic       Collin
+## 68         Gary      000911  59 01/12/2010    White       Walker
+## 69      Kenneth      999243  51 01/07/2010    Black       Dallas
+## 70        Bobby      999270  44 12/03/2009    White        Llano
+## 71       Robert      999276  34 11/19/2009    Black       Harris
+## 72     Danielle      999370  30 11/18/2009    Black     Anderson
+## 73     Yosvanis      999384  34 11/10/2009 Hispanic       Harris
+## 74    Khristian      999301  32 11/05/2009    White  Nacogdoches
+## 75     Reginald      999395  28 10/27/2009    Black        Bexar
+## 76  Christopher      999239  37 09/22/2009    Black       Harris
+## 77      Stephen      999076  52 09/16/2009    White       Harris
+## 78        Terry      999415  34 06/02/2009    White      Tarrant
+## 79      Michael      000851  51 05/19/2009    Black         Wood
+## 80      Derrick      999339  28 04/30/2009    Black       Dallas
+## 81      Michael      999274  35 04/15/2009 Hispanic      Lubbock
+## 82         Luis      999285  38 03/11/2009 Hispanic        Bexar
+## 83        James      999404  34 03/10/2009 Hispanic      Tarrant
+## 84      Kenneth      999117  38 03/04/2009    Black       Harris
+## 85       Willie      999111  34 03/03/2009    Black    Red River
+## 86       Johnny      999197  51 02/12/2009    Black       Harris
+## 87         Dale      999440  35 02/10/2009    Black      Tarrant
+## 88        David      999173  36 02/04/2009 Hispanic        Bexar
+## 89      Ricardo      999320  46 01/29/2009 Hispanic      El Paso
+## 90       Virgil      999265  41 01/28/2009 Hispanic     Brazoria
+## 91     Reginald      999407  53 01/22/2009    Black      Tarrant
+## 92        Frank      999210  49 01/21/2009    Black        Bexar
+## 93       Curtis      999212  40 01/14/2009    Black      Tarrant
+## 94       Robert      999353  45 11/20/2008    Black       Dallas
+## 95       Denard      999405  42 11/13/2008    Black         Bell
+## 96       George      999196  36 11/12/2008    Black       Harris
+## 97        Elkie      999112  46  11/6/2008    Black      Tarrant
+## 98      Gregory      999253  42 10/30/2008    White       Dallas
+## 99         Eric      999188  45 10/28/2008    White       Harris
+## 100      Joseph      999335  29 10/21/2008    White      Hopkins
+## 101       Kevin      999456  27 10/16/2008    Black        Bexar
+## 102       Alvin      999012  57 10/14/2008    White        Gregg
+## 103     William      999313  39 09/17/2008    White      Kaufman
+## 104     Michael      999413  40 08/14/2008 Hispanic       Dallas
+## 105        Leon      999359  32 08/12/2008    Black       Dallas
+## 106   Heliberto      999437  29 08/07/2008 Hispanic      Tarrant
+## 107        Jose      999134  33 08/05/2008 Hispanic       Harris
+## 108       Larry      999316  40 07/31/2008    Black       Potter
+## 109     Derrick      999054  40 07/23/2008    Black       Harris
+## 110     Carlton      999321  29 07/10/2008    Black       Dallas
+## 111        Karl      999241  37 06/11/2008    White       Dallas
+## 112     Michael      000890  48 09/25/2007    Black       Harris
+## 113    Clifford      999347  32 09/20/2007    White        Bexar
+## 114        Tony      999323  30 09/05/2007    White       Potter
+## 115        John      999160  32 08/29/2007 Hispanic        Bexar
+## 116     Daroyce      999171  32 08/28/2007    Black        Gregg
+## 117      Johnny      999324  32 08/22/2007    Black       Harris
+## 118     Kenneth      999312  27 08/15/2007    Black    Matagorda
+## 119      Lonnie      999135  44 07/24/2007    Black       Harris
+## 120     Patrick      999072  39 06/26/2007    White      Randall
+## 121    Gilberto      999352  33 06/21/2007 Hispanic       Bailey
+## 122     Lionell      999002  36 06/20/2007 Hispanic       Harris
+## 123     Michael      999176  56 06/06/2007    White       Harris
+## 124     Charles         953  41 05/16/2007    White        Pecos
+## 125        Ryan      999250  30 04/26/2007    White       Potter
+## 126       James      999095  38 04/11/2007    White       Denton
+## 127         Roy      999170  51 03/29/2007    White       Harris
+## 128     Vincent      999262  28 03/28/2007 Hispanic        Bexar
+## 129     Charles      999289  42 03/20/2007    Black       Dallas
+## 130      Joseph         709  45 03/07/2007    Black       Harris
+## 131      Robert      999322  48 03/06/2007 Hispanic       Dallas
+## 132      Donald         728  44 02/27/2007    White       Harris
+## 133      Newton      999355  30 02/22/2007    White        Smith
+## 134       James      999272  47 02/07/2007    Black       Harris
+## 135 Christopher      999496  31 01/30/2007    White       Denton
+## 136    Jonathan      999216  32 01/17/2007    White        Bexar
+## 137      Carlos      999307  36 01/10/2007 Hispanic   Williamson
+## 138      Willie      999086  30 11/08/2006    Black       Harris
+## 139      Donell      999206  33 11/01/2006    Black       Harris
+## 140     Gregory      999010  48 10/25/2006    White       Denton
+## 141      Farley      999060  43 09/12/2006    Black       Harris
+## 142     Derrick      999284  29 08/31/2006    Black      Refugio
+## 143      Justin      999266  27 08/24/2006    Black        Smith
+## 144     Richard      999246  43 08/17/2006 Hispanic        Bexar
+## 145     William      999255  41 08/03/2006    Black        Bowie
+## 146      Robert      999084  40 07/20/2006    White       Potter
+## 147    Mauriceo      999234  31 07/19/2006    Black        Bexar
+## 148     Derrick      999131  31 07/11/2006    Black       Harris
+## 149       Angel      999356  45 06/27/2006 Hispanic       Harris
+## 150      Lamont      999374  28 06/20/2006    Black      Tarrant
+## 151     Timothy      999078  34 06/06/2006    White      Randall
+## 152       Jesus      999191  42 05/24/2006 Hispanic      Cameron
+## 153    Jermaine      999304  27 05/17/2006    Black      Refugio
+## 154      Jackie         957  39 05/04/2006    White       Dallas
+## 155       Kevin      999179  38 03/29/2006    Black       Harris
+## 156      Robert      999303  27 03/22/2006 Hispanic      Lubbock
+## 157      Tommie      999273  31 03/15/2006    Black       Dallas
+## 158       Clyde      999088  32 02/15/2006    Black       Harris
+## 159      Robert      999293  31 02/08/2006    White      Tarrant
+## 160       Jaime      999230  34 01/31/2006 Hispanic       Harris
+## 161      Marion      999136  33 01/25/2006    Black       Harris
+## 162     Shannon      999213  34 11/16/2005    Black       Harris
+## 163      Robert      999104  50 11/15/2005    White       Harris
+## 164     Charles      999103  37 11/09/2005    White       Harris
+## 165      Melvin      999317  55 11/03/2005    White        Pecos
+## 166        Luis      999309  42 10/20/2005 Hispanic    Tom Green
+## 167      Ronald      999069  32 10/06/2005    Black       Travis
+## 168     Francis         922  40 09/14/2005    Black       Harris
+## 169      Robert      999166  30 08/23/2005    White    Galveston
+## 170        Gary         931  38 08/10/2005    Black      Navarro
+## 171       David      999288  29 07/28/2005 Hispanic       Travis
+## 172   Alexander      999438  28 06/07/2005 Hispanic       Harris
+## 173     Richard      999224  31 05/19/2005    White       Nueces
+## 174       Bryan      999079  44 05/18/2005    Black    Jefferson
+## 175      Lonnie      999294  43 05/03/2005    White         Polk
+## 176     Douglas      999218  42 04/20/2005    White      Kendall
+## 177      George      999037  49 03/08/2005    White       Dallas
+## 178      Dennis      999209  41 02/17/2005    White     Atascosa
+## 179        Troy         784  38 01/25/2005    White       Nueces
+## 180       James      999378  33 01/04/2005    White        Bowie
+## 181     Anthony      999215  30 11/17/2004 Hispanic       Harris
+## 182   Frederick      999242  30 11/10/2004    Black       Harris
+## 183     Demarco      999180  30 11/09/2004    Black       Harris
+## 184      Robert      999244  47 11/04/2004    White      Liberty
+## 185     Lorenzo      999038  52 11/02/2004    Black       Harris
+## 186   Dominique      999068  30 10/26/2004    Black       Harris
+## 187       Ricky         753  53 10/20/2004    White       Dallas
+## 188      Donald      999113  39 10/12/2004    White         Kerr
+## 189       Peter         920  42 10/06/2004 Hispanic       Harris
+## 190      Edward      999073  30 10/05/2004    Black       Harris
+## 191      Andrew      999100  32 09/21/2004 Hispanic        Bexar
+## 192       James         870  41 08/26/2004    Black      Tarrant
+## 193       Jasen      999201  28 08/25/2004    White     Cherokee
+## 194       David         827  43 06/30/2004    White    Jefferson
+## 195      Kelsey      999065  50 05/18/2004    Black     Anderson
+## 196      Marcus      999252  29 03/03/2004    Black       Harris
+## 197     Cameron      999041  36 02/17/2004    White      Navarro
+## 198       Bobby      999101  36 02/12/2004    Black      Johnson
+## 199      Edward      999083  46 02/11/2004    Black      Tarrant
+## 200       Billy      999087  58 01/28/2004    White        Lamar
+## 201       Kevin         977  42 01/21/2004    White    Jefferson
+## 202     Kenneth      999023  32 01/14/2004    Black       Collin
+## 203       Ynobe      999387  27 01/06/2004    Black       Brazos
+## 204        Ivan         989  38 12/04/2003    White      Grayson
+## 205     Richard      999153  61 12/03/2003    White       Harris
+## 206      Robert      999129  41 11/20/2003    White San Patricio
+## 207       Larry      999358  54 09/10/2003    White   Montgomery
+## 208       Allen         684  53 07/24/2003    White       Harris
+## 209      Cedric      999050  29 07/23/2003    Black      Tarrant
+## 210 Christopher      999277  43 07/09/2003    Black         Bell
+## 211      Hilton      999200  64 07/02/2003    White   Montgomery
+## 212         Kia      999139  38 06/11/2003    Black        Bexar
+## 213       Bruce         876  56 05/15/2003    White       Dallas
+## 214       Roger      999029  48 05/06/2003    White    Wilbarger
+## 215        John      999186  34 04/22/2003 Hispanic       Dallas
+## 216       James      999169  43 03/26/2003    White   Montgomery
+## 217       Keith      999238  35 03/20/2003    Black       Harris
+## 218       Bobby      999094  41 03/11/2003    White     Anderson
+## 219     Richard      999251  33 02/25/2003    Black       Harris
+## 220       Henry      999165  28 02/06/2003    Black        Smith
+## 221        John         861  42 02/04/2003 Hispanic       Travis
+## 222   Granville         965  33 01/30/2003    White       Potter
+## 223     Richard      999022  40 01/29/2003    White    Jefferson
+## 224        Alva      999080  32 01/28/2003    Black       Travis
+## 225      Robert         990  37 01/22/2003    White      Hidalgo
+## 226        John      999257  30 01/15/2003 Hispanic       Nueces
+## 227      Samuel      999090  31 01/14/2003    White        Comal
+## 228       James      999190  55 12/11/2002    White      Wichita
+## 229     Leonard      999194  52 12/04/2002 Hispanic      Johnson
+## 230     William         960  66 11/20/2002    White      Tarrant
+## 231       Craig         979  47 11/19/2002    White       Harris
+## 232       James      999001  56 10/01/2002    White       Newton
+## 233      Calvin      999152  48 09/25/2002    Black    Jefferson
+## 234         Rex      999172  42 09/24/2002    White       Harris
+## 235         Ron      999167  30 09/18/2002    White       Brazos
+## 236      Jessie         975  44 09/17/2002    White       Dallas
+## 237        Tony      999082  36 09/10/2002    Black       Morris
+## 238     Toronto      999178  24 08/28/2002    Black       Dallas
+## 239        Gary         986  38 08/20/2002    White     Brazoria
+## 240      Javier         944  33 08/14/2002 Hispanic       Dallas
+## 241        T.J.      999133  25 08/08/2002    Black        Gregg
+## 242     Richard      999227  59 08/07/2002    White   Montgomery
+## 243     Jeffrey      999154  30 06/26/2002    Black       Harris
+## 244      Robert      999115  34 06/25/2002    White       Harris
+## 245      Daniel      999223  27 06/13/2002    White    Gillespie
+## 246     Stanley      999157  35 05/30/2002    White       Brazos
+## 247    Napoleon      999141  25 05/28/2002    Black        Smith
+## 248      Johnny      999089  29 05/22/2002 Hispanic       Nueces
+## 249     Ronford      999124  32 05/16/2002    White      Liberty
+## 250    Reginald      999119  28 05/09/2002    Black    Red River
+## 251     Rodolfo         807  54 04/30/2002 Hispanic        Comal
+## 252      Gerald      999013  47 04/18/2002    White   Montgomery
+## 253     William         692  43 04/11/2002    Black        Bowie
+## 254        Jose      999140  40 04/10/2002 Hispanic         Kerr
+## 255      Gerald      999099  29 03/07/2002    Black     McLennan
+## 256       Monty         900  35 02/28/2002    White     Anderson
+## 257     Randall         826  48 01/31/2002    White      Randall
+## 258     Windell      999064  41 01/30/2002    Black    Jefferson
+## 259     Jermarr         987  43 01/16/2002    Black       Nueces
+## 260     Michael      999126  31 01/09/2002    White      Coryell
+## 261     Vincent         927  37 12/12/2001    Black       Dallas
+## 262     Emerson         936  31 11/15/2001    Black       Dallas
+## 263     Jeffery         952  41 11/14/2001    White       Parker
+## 264      Gerald         838  33 10/22/2001    Black       Harris
+## 265       James         823  50 09/18/2001    White    Galveston
+## 266     Jeffery      999106  39 08/16/2001    White       Nueces
+## 267        Mack         961  47 08/08/2001    White      Lubbock
+## 268       James         897  39 07/11/2001    White        Smith
+## 269      Miguel         691  46 06/26/2001    Black        Bexar
+## 270        John      999222  57 06/13/2001    White      Tarrant
+## 271       David      999015  31 04/25/2001    Black      Tarrant
+## 272       Jason      999121  28 04/03/2001    White        Ellis
+## 273      Dennis      999047  55 03/07/2001    White   Montgomery
+## 274      Adolph         978  50 02/08/2001 Hispanic      Lubbock
+## 275   Caruthers         704  52 01/29/2001    Black        Bexar
+## 276       Alvin         879  37 01/18/2001    White   Montgomery
+## 277        Jack         994  37 01/09/2001    White      Lubbock
+## 278      Claude         980  60 12/07/2000    White  San Jacinto
+## 279      Daniel         981  50 12/06/2000    White       Dallas
+## 280       Garry         947  33 12/05/2000    White        Jones
+## 281        Tony      999009  32 11/15/2000    Black        Smith
+## 282      Stacey      999066  31 11/14/2000    Black        Smith
+## 283      Miguel         983  31 11/09/2000 Hispanic       Collin
+## 284     Jeffery      999071  27 11/01/2000    White      Wichita
+## 285       Ricky      999150  43 09/27/2000    White        Brown
+## 286     Jeffery         938  37 08/30/2000    Black       Dallas
+## 287       David         825  39 08/23/2000    White   Montgomery
+## 288     Richard         882  40 08/22/2000    White      Tarrant
+## 289        John         651  53 08/16/2000    Black        Bexar
+## 290      Oliver         954  33 08/09/2000 Hispanic        Bexar
+## 291       Brian         886  36 08/09/2000    Black       Dallas
+## 292        Juan         837  33 07/26/2000 Hispanic      Tarrant
+## 293       Orien         902  50 07/12/2000    White      Lubbock
+## 294       Jessy      999008  28 06/29/2000 Hispanic       Dallas
+## 295        Gary         696  39 06/22/2000    Black       Harris
+## 296        Paul      999158  32 06/15/2000 Hispanic         Hale
+## 297        John         949  44 06/14/2000    Black     McLennan
+## 298      Thomas      999035  48 06/12/2000    White        Smith
+## 299      Robert      999091  34 05/31/2000    Black      Bastrop
+## 300       James         921  33 05/25/2000    Black       Taylor
+## 301     Richard         815  47 05/24/2000    White       Parker
+## 302       James         867  32 05/23/2000    Black      Navarro
+## 303     Michael         903  38 05/11/2000    White      Lubbock
+## 304     William         840  37 05/09/2000    White       Taylor
+## 305       Tommy         821  43 05/04/2000    Black   Williamson
+## 306     Timothy         929  36 03/15/2000    White    Galveston
+## 307     Ponchai      999011  28 03/14/2000    Black       Harris
+## 308       Odell         998  31 03/01/2000    Black      Lubbock
+## 309       Betty         810  62 02/24/2000    White    Henderson
+## 310   Cornelius         912  38 02/23/2000    Black       Dallas
+## 311       James         741  39 01/27/2000    White    Henderson
+## 312        Glen      999039  27 01/25/2000    Black   Montgomery
+## 313       Billy         556  47 01/24/2000    White    Matagorda
+## 314       Larry         748  42 01/21/2000    White      Tarrant
+## 315       David         930  38 01/20/2000    Black    Freestone
+## 316     Spencer      999031  31 01/18/2000    White    Fort Bend
+## 317        Earl      999014  48 01/12/2000    White       Sabine
+## 318      Sammie         550  54 12/15/1999    Black       Harris
+## 319      Robert      999199  30 12/14/1999    White       Dallas
+## 320       James         785  42 12/09/1999    White      Trinity
+## 321       David         862  46 12/08/1999    White       Dallas
+## 322        Jose         970  39 11/18/1999 Hispanic       Brazos
+## 323        John         734  42 11/17/1999    White         Hunt
+## 324     Desmond      999161  28 11/16/1999    Black      Tarrant
+## 325     Domingo         924  31 10/28/1999 Hispanic       Dallas
+## 326       Jerry         875  51 10/14/1999    White       Upshur
+## 327       Alvin         888  41 10/12/1999    White       Denton
+## 328     Richard      999116  43 09/21/1999    White       Harris
+## 329     William         614  42 09/14/1999    Black       Harris
+## 330      Willis         935  51 09/10/1999    Black       Harris
+## 331     Raymond         959  39 09/01/1999    Black    Jefferson
+## 332         Joe         767  37 08/18/1999 Hispanic      Tarrant
+## 333       James         905  56 08/11/1999    White          Lee
+## 334     Kenneth         675  39 08/10/1999    Black       Harris
+## 335     Charles         891  39 08/05/1999    Black       Dallas
+## 336       Ricky         893  41 08/04/1999    White       Shelby
+## 337      Tyrone         934  35 07/07/1999    Black      Grayson
+## 338     Charles      999183  35 07/01/1999    White        Smith
+## 339      Joseph         580  61 06/17/1999    White        Gregg
+## 340     William         788  38 06/01/1999    White      Liberty
+## 341     Clydell         968  62 05/05/1999    Black     McLennan
+## 342        Jose         908  31 05/04/1999 Hispanic       Nueces
+## 343       Aaron      999268  26 04/28/1999    White      Tarrant
+## 344      Excell         511  61 03/30/1999    White       Collin
+## 345     Charles         721  44 03/26/1999    Black       Travis
+## 346      Norman         805  38 02/24/1999    Black        Bexar
+## 347      Andrew         999  30 02/16/1999 Hispanic       Taylor
+## 348       Danny         673  43 02/11/1999    White       Dallas
+## 349      George         706  39 02/10/1999 Hispanic        Bexar
+## 350      Martin         932  52 01/26/1999 Hispanic     Caldwell
+## 351        Troy         831  36 01/13/1999    White      Tarrant
+## 352        John         933  46 01/05/1999    White       Taylor
+## 353       James         689  42 12/15/1998    Black       Harris
+## 354        Jeff         830  49 12/08/1998    White       Brazos
+## 355      Daniel         969  40 12/07/1998    White   Montgomery
+## 356     Kenneth      999055  52 11/17/1998    White       Harris
+## 357    Jonathan         885  37 10/07/1998    White       Travis
+## 358      Javier      999061  41 10/01/1998 Hispanic        Bexar
+## 359       David         770  43 08/23/1998 Hispanic      Hidalgo
+## 360     Delbert         849  35 09/09/1998    White      Tarrant
+## 361      Genaro         972  43 08/26/1998 Hispanic       Dallas
+## 362    Leopoldo         923  30 06/26/1998 Hispanic        Bexar
+## 363      Johnny         724  40 06/15/1998    White       Dallas
+## 364    Clifford         887  32 06/11/1998    White         Clay
+## 365       Pedro         575  41 05/19/1998 Hispanic   Williamson
+## 366      Robert         708  34 05/18/1998    Black       Harris
+## 367       Frank         963  34 04/29/1998    White      Tarrant
+## 368      Lesley         842  42 04/24/1998    White     Victoria
+## 369      Joseph         634  38 04/22/1998    White        Bexar
+## 370       Jerry         660  47 03/11/1998    White      Tarrant
+## 371      Steven      999229  40 02/09/1998    White     Harrison
+## 372       Karla         777  38 02/03/1998    White       Harris
+## 373     Michael         917  37 12/09/1997    White        Bexar
+## 374     Charlie         802  35 11/21/1997    Black       Harris
+## 375     Michael         740  43 11/19/1997    White     Crockett
+## 376       Aaron         964  30 11/06/1997    White       Dawson
+## 377         Aua         843  43 11/04/1997    Other       Harris
+## 378     Kenneth         772  34 10/28/1997    Black       Harris
+## 379       Ricky         984  36 10/08/1997    White      Tarrant
+## 380      Dwight         940  41 10/01/1997    Black        Bexar
+## 381        John         854  38 09/30/1997    White        Bowie
+## 382    Benjamin      999187  45 09/25/1997    White       Nueces
+## 383      Jessel         895  37 09/22/1997    Black       Harris
+## 384       James         786  34 09/09/1997    Black       Travis
+## 385      Robert         731  35 07/29/1997    White       Harris
+## 386      Irineo         847  29 06/18/1997 Hispanic      Cameron
+## 387       Eddie         898  44 06/17/1997    Black      Aransas
+## 388       David         892  38 06/16/1997    White         Hale
+## 389        Earl         914  33 06/11/1997    White      Tarrant
+## 390       Davis         798  32 06/04/1997 Hispanic      Cameron
+## 391      Dorsie         850  30 06/04/1997    Black       Scurry
+## 392     Kenneth         901  34 06/03/1997    Black       Harris
+## 393     Patrick         816  33 06/02/1997    Black       Collin
+## 394      Robert         822  33 05/28/1997    White         Leon
+## 395       Larry         640  47 05/22/1997    White       Harris
+## 396       Bruce         717  37 05/21/1997    Black      Tarrant
+## 397    Clarence         591  42 05/20/1997    White    Tom Green
+## 398     Richard         846  39 05/19/1997    White       Harris
+## 399     Clifton         841  38 05/16/1997    White     McLennan
+## 400     Anthony         797  36 05/13/1997    Black       Harris
+## 401       Terry         884  33 05/06/1997    Black       Walker
+## 402      Ernest         855  55 04/29/1997    White      Navarro
+## 403    Benjamin         853  53 04/21/1997    White       Potter
+## 404     Kenneth         760  36 04/16/1997    White       Denton
+## 405       Billy         552  50 04/14/1997    White       Harris
+## 406       David         773  40 04/03/1997    White     McLennan
+## 407       David      999003  39 04/02/1997    White      Tarrant
+## 408        John         844  32 03/12/1997    Black       Harris
+## 409     Richard         899  42 02/10/1997    White      Kleberg
+## 410         Joe      999177  36 09/18/1996 Hispanic       Potter
+## 411     Kenneth         533  45 02/27/1996    Black      Tarrant
+## 412         Leo         967  38 02/09/1996    White       Harris
+## 413       James         711  40 12/12/1995    White       Harris
+## 414     Esequel         863  31 12/11/1995 Hispanic     Hamilton
+## 415         Hai         904  40 12/07/1995    Other    Jefferson
+## 416     Bernard         926  33 12/06/1995    Black       Dallas
+## 417      Harold         745  50 10/04/1995    White       Dallas
+## 418        Carl         633  40 09/19/1995    Black       Harris
+## 419      Vernon         857  40 08/15/1995    Black        Bexar
+## 420        Karl         865  31 06/21/1995    Black        Bexar
+## 421        John         626  41 06/20/1995    Black       Dallas
+## 422      Ronald         818  35 06/08/1995    Black      Tarrant
+## 423    Fletcher         705  34 06/01/1995    White       Dallas
+## 424       Noble         674  42 04/06/1995    White    Wilbarger
+## 425      Samuel         590  52 02/21/1995    Black      Lubbock
+## 426       Billy         751  52 02/16/1995    White       Dallas
+## 427     Jeffery         789  29 02/07/1995    White       Harris
+## 428      Willie         677  38 01/31/1995    Black       Harris
+## 429     Clifton         658  38 01/31/1995    White       Taylor
+## 430       Mario         776  36 01/17/1995 Hispanic        Bexar
+## 431       Jesse         872  44 01/04/1995    White       Walker
+## 432     Raymond         808  53 12/11/1994    White       Harris
+## 433      Herman         715  48 12/06/1994    Black       Harris
+## 434      Warren         668  34 11/22/1994    White    Galveston
+## 435      Walter         722  32 10/05/1994    Black        Bexar
+## 436      George      999058  47 09/20/1994    White       Potter
+## 437      Jessie         971  29 09/16/1994 Hispanic       Brazos
+## 438      Robert         755  35 08/02/1994    White       Harris
+## 439      Denton         803  38 06/14/1994    White       Harris
+## 440     Stephen         698  33 05/27/1994    White       Dallas
+## 441        Paul         603  46 05/03/1994    Black       Harris
+## 442       Larry         733  41 04/26/1994    White       Harris
+## 443     Richard         916  39 04/04/1994    White       Harris
+## 444     Freddie         848  33 03/31/1994    Black       Nueces
+## 445      Harold         683  51 02/02/1994    White    Galveston
+## 446    Clifford         723  59 12/15/1993    Black       Harris
+## 447     Anthony         918  34 11/10/1993    White        Milam
+## 448     Antonio         700  33 09/28/1993    Black       Harris
+## 449      Johnny         839  39 09/03/1993    White     Chambers
+## 450     Richard         756  29 08/31/1993    Black       Harris
+## 451       Ruben         804  26 08/24/1993 Hispanic        Bexar
+## 452        Carl         688  34 08/20/1993    Black     McLennan
+## 453       David         820  58 08/12/1993    White    Jefferson
+## 454      Joseph         699  39 08/05/1993    White      Navarro
+## 455       Danny         649  32 07/30/1993    Black       Brazos
+## 456      Curtis         637  31 07/01/1993    Black       Brazos
+## 457      Markum         694  46 06/29/1993    White       Harris
+## 458        John         742  38 05/18/1993    White       Harris
+## 459      Leonel         702  45 05/12/1993 Hispanic      Cameron
+## 460      Darryl         664  38 05/04/1993    Black       Harris
+## 461       Ramon         737  38 03/25/1993 Hispanic       Dallas
+## 462      Carlos         695  40 03/23/1993 Hispanic       Harris
+## 463       Kavin         832  29 12/10/1992    Black     Brazoria
+## 464     Jeffery         647  37 11/19/1992    Black       Harris
+## 465       James         572  37 09/22/1992    Black       Harris
+## 466      Curtis         761  38 08/11/1992    Black       Harris
+## 467      Robert         819  45 05/22/1992    White       Brazos
+## 468       Jesus         801  27 05/20/1992 Hispanic      Cameron
+## 469      Justin         783  46 05/07/1992    White     Brazoria
+## 470       Billy         585  34 04/23/1992    Black       Harris
+## 471      Edward         749  38 03/03/1992    White       Harris
+## 472       David         874  32 02/28/1992    White       Brazos
+## 473      Johnny         729  28 02/11/1992    White       Potter
+## 474         Joe         730  39 01/22/1992 Hispanic       Harris
+## 475        G.W.         576  49 11/12/1991    White   Montgomery
+## 476       James         579  42 09/19/1991    Black    Fort Bend
+## 477       Jerry         512  54 06/17/1991    White      Cameron
+## 478     Ignacio         526  59 05/23/1991 Hispanic       Harris
+## 479    Lawrence         743  38 02/26/1991    Black       Harris
+## 480       Mikel         701  33 07/18/1990    White       Harris
+## 481       James         763  37 06/26/1990    Black       Harris
+## 482      Johnny         732  30 05/17/1990    White    Jefferson
+## 483      Jerome         852  54 04/21/1990    Black       Harris
+## 484      Carlos         744  27 12/07/1989 Hispanic       Nueces
+## 485       James         752  44 09/20/1989    White       Harris
+## 486     Stephen         769  40 05/24/1989    White       Harris
+## 487        Leon         624  44 03/22/1989    Black       Harris
+## 488     Raymond         738  39 12/13/1988    Black       Harris
+## 489      Donald         546  37 11/03/1988    Black       Nueces
+## 490      Robert         746  27 01/07/1988    White       Hardin
+## 491      Joseph         586  34 09/10/1987    White   Montgomery
+## 492        John         610  32 07/08/1987    White        Bexar
+## 493      Elliot         739  38 06/24/1987    Black    Jefferson
+## 494     Anthony         619  27 05/28/1987    Black       Harris
+## 495      Eliseo         759  27 03/04/1987 Hispanic    Fort Bend
+## 496       Ramon         667  44 01/30/1987 Hispanic      El Paso
+## 497     Richard         774  25 12/18/1986 Hispanic       Nueces
+## 498     Michael         608  30 12/04/1986    Black       Dallas
+## 499     Chester         678  37 08/26/1986    White    Galveston
+## 500       Larry         643  30 08/22/1986    Black       Dallas
+## 501       Randy         646  36 08/20/1986    White    Tom Green
+## 502     Kenneth         522  37 06/19/1986    White       Harris
+## 503        Rudy         606  50 06/09/1986 Hispanic       Harris
+## 504         Jay         686  24 05/15/1986    White       Nueces
+## 505     Jeffery         714  28 04/16/1986    White       Harris
+## 506     Charles         662  30 03/12/1986    White       Harris
+## 507     Charles         555  28 09/11/1985    White       Potter
+## 508       Henry         551  43 07/09/1985 Hispanic      Tarrant
+## 509     Charles         628  34 06/25/1985    Black      Tarrant
+## 510       Jesse         713  24 05/15/1985 Hispanic        Bexar
+## 511     Stephen         712  34 03/13/1985    White    Jefferson
+## 512       Doyle         518  49 01/16/1985    White      Lubbock
+## 513      Thomas         621  39 10/30/1984    White         Bell
+## 514      Ronald         529  39 03/31/1984    White       Harris
+## 515       James         670  29 03/14/1984    White    Jefferson
+## 516     Charlie         592  40 12/07/1982    Black      Tarrant
+</code></pre>
+
+</body>
+
+</html>
+

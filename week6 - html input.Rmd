@@ -1,0 +1,18 @@
+Read html file as input 
+========================================================
+
+http://www.tdcj.state.tx.us/death_row/dr_executed_offenders.html
+
+```{r}
+library(XML)
+mps <- "http://www.tdcj.state.tx.us/death_row/dr_executed_offenders.html" 
+
+# parse the document for R representation: 
+mps.doc <- htmlParse(mps)
+
+# get all the tables in mps.doc as data frames
+mps.tabs <- readHTMLTable(mps.doc) 
+print(mps.tabs)
+```
+
+
