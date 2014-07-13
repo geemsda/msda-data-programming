@@ -1,8 +1,8 @@
 Read comma delimited file into R  (file name pizza.store.data)
 ========================================================
 ```{r}
+  pizza.store.data <- read.csv("~/Documents/dataguru/R Project MSDA Summer/pizza-store-data.txt")
    {str(pizza.store.data)} 
    {summary(pizza.store.data)}
-
 ```
 
