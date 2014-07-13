@@ -1,0 +1,5 @@
+Title
+========================================================
+
+str(pizza.store.data)
+summary(pizza.store.data)
