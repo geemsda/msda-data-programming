@@ -1,0 +1,28 @@
+Title
+========================================================
+R binom function
+Question 1 - 4
+```{r}
+totalseq <- 0
+for i in 1:100
+
+{
+  flips <- (rbinom(100,1,0.50))
+  print(flips)
+  
+  seq <- 0
+  t <-0
+  prevflip <- ' '
+  
+  while (seq < 7 and t < length(flips))
+    {
+     ifelse (flip(t) == prevflip,seq = seq + 1, seq =1 )
+     prevflip <- flip(t)
+     t <- t + 1
+    }
+  print seq
+}  
+  totalseq <- totalse + ifelse (seq == 7,1, 0)
+```
+
+
