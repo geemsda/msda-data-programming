@@ -1,0 +1,53 @@
+R Code Assignment - Week 8
+========================================================
+QUESTION 1:
+
+The following  code does an element by element addition of two vectors v and w.
+
+```{
+v <- 2:8
+v
+w <- seq (5, 35, 5)
+w
+for (i in 1:7) {
+  s  <- v[i] + w[i]
+  print(s)
+}
+```
+
+Alternately, the R code v+w, would have return the same results of adding each element of v to the correspoding element of w (provided they are of the same length, otherwise R repeats the element of the shortes vector to complete the addition)
+
+QUESTION 2
+
+The following code counts the number of "heads" in a vector of coin toss results
+
+```
+{
+
+g <-c("heads","heads","heads","heads","heads","tails","heads")
+t <- 1
+c <- 0
+while (g[t] != "tails" &&  t <= length(g)) 
+{
+     t = t + 1
+     c = c + 1
+}
+g
+print(c)
+
+}
+
+QUESTION 3
+
+Totals all odd numbers bewteen 1 and 100
+```
+{ 
+r <- 0
+for (i in 1:100)
+{
+   
+     r = r + (ifelse (i%%2 == 0,0,i))
+     
+}
+print (r)
+}

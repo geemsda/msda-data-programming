@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>R Code Assignment - Week 8</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>R Code Assignment - Week 8</h1>
+
+<p>QUESTION 1:</p>
+
+<p>The following  code does an element by element addition of two vectors v and w.</p>
+
+<p>&ldquo;{
+v &lt;- 2:8
+v
+w &lt;- seq (5, 35, 5)
+w
+for (i in 1:7) {
+  s  &lt;- v[i] + w[i]
+  print(s)
+}</p>
+
+<pre><code>
+Alternately, the R code v+w, would have return the same results of adding each element of v to the correspoding element of w (provided they are of the same length, otherwise R repeats the element of the shortes vector to complete the addition)
+
+QUESTION 2
+
+The following code counts the number of &quot;heads&quot; in a vector of coin toss results
+
+</code></pre>
+
+<p>{</p>
+
+<p>g &lt;-c(&quot;heads&rdquo;,&ldquo;heads&rdquo;,&ldquo;heads&rdquo;,&ldquo;heads&rdquo;,&ldquo;heads&rdquo;,&ldquo;tails&rdquo;,&ldquo;heads&rdquo;)
+t &lt;- 1
+c &lt;- 0
+while (g[t] != &ldquo;tails&rdquo; &amp;&amp;  t &lt;= length(g)) 
+{
+     t = t + 1
+     c = c + 1
+}
+g
+print&copy;</p>
+
+<p>}</p>
+
+<p>QUESTION 3</p>
+
+<p>Totals all odd numbers bewteen 1 and 100</p>
+
+<pre><code>{ 
+r &lt;- 0
+for (i in 1:100)
+{
+
+     r = r + (ifelse (i%%2 == 0,0,i))
+
+}
+print (r)
+}
+</code></pre>
+
+</body>
+
+</html>
+
