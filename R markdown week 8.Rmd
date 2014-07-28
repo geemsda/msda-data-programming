@@ -4,7 +4,7 @@ QUESTION 1:
 
 The following  code does an element by element addition of two vectors v and w.
 
-```{
+```{r}
 v <- 2:8
 v
 w <- seq (5, 35, 5)
@@ -12,7 +12,7 @@ w
 for (i in 1:7) {
   s  <- v[i] + w[i]
   print(s)
-}
+
 ```
 
 Alternately, the R code v+w, would have return the same results of adding each element of v to the correspoding element of w (provided they are of the same length, otherwise R repeats the element of the shortes vector to complete the addition)
@@ -21,8 +21,8 @@ QUESTION 2
 
 The following code counts the number of "heads" in a vector of coin toss results
 
-```
-{
+
+```{r}
 
 g <-c("heads","heads","heads","heads","heads","tails","heads")
 t <- 1
@@ -34,14 +34,13 @@ while (g[t] != "tails" &&  t <= length(g))
 }
 g
 print(c)
-
-}
+```
 
 QUESTION 3
 
 Totals all odd numbers bewteen 1 and 100
-```
-{ 
+
+```{r}
 r <- 0
 for (i in 1:100)
 {
